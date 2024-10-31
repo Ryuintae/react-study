@@ -1,6 +1,16 @@
 const fs = require('fs');
-const inputData = fs.readFileSync('./input.txt', 'utf8').toString().split(' ');
-const A = parseInt(inputData[0]);
-const B = parseInt(inputData[1]);
+const file = process.platform === "linux" ? "dev/stdin" : "./input.txt";
+const inputData = fs.readFileSync(file).toString().trim().split('\n').map(Number);
 
-console.log(A+B);
+let a = [];
+for (let i = 1; i <= 30; i++) {
+    a.push(i)
+}
+
+// 함수 구현
+function callback(x) {
+    return !inputData.includes(x)
+}
+
+let result = a.filter((x) => !inputData.includes(x))
+console.log(result.join(`\n`));
